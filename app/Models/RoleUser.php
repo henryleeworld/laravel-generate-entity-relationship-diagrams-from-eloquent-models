@@ -3,32 +3,30 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * @property int $id
- * @property string $created_at
- * @property string $updated_at
- */
 class RoleUser extends Model
 {
     /**
-     * @var array
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
      */
     protected $fillable = ['user_id', 'role_id', 'created_at', 'updated_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Get the role that owns the role user.
      */
-    public function role()
+    public function role(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Role', 'role_id');
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Get the user that owns the role user.
      */
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

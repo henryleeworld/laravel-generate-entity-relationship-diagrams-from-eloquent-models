@@ -3,28 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * @property int $id
- * @property int $author_id
- * @property string $likeable_type
- * @property integer $likeable_id
- * @property string $created_at
- * @property string $updated_at
- * @property User $user
- */
-class Likes extends Model
+class Like extends Model
 {
     /**
-     * @var array
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
      */
     protected $fillable = ['author_id', 'likeable_type', 'likeable_id', 'created_at', 'updated_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Get the user that owns the like.
      */
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo('App\Models\User', 'author_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

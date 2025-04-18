@@ -3,26 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property int $id
- * @property string $name
- * @property string $created_at
- * @property string $updated_at
- * @property RoleUser[] $roleUsers
- */
 class Role extends Model
 {
     /**
-     * @var array
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
      */
     protected $fillable = ['name', 'created_at', 'updated_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Get the role users for the role.
      */
-    public function roleUsers()
+    public function roleUsers(): HasMany
     {
-        return $this->hasMany('App\Models\RoleUser');
+        return $this->hasMany(RoleUser::class);
     }
 }

@@ -1,4 +1,4 @@
-# Laravel 11 從 Eloquent 模型產生實體關係圖
+# Laravel 12 從 Eloquent 模型產生實體關係圖
 
 引入 beyondcode 的 laravel-er-diagram-generator 套件來擴增從 Eloquent 模型產生實體關係圖，幫助我們在開始寫程式碼之前，先想清楚資料庫的全貌，並建立資料之間的關係，確認對資料結構與關聯的規劃是否有所遺漏。
 
@@ -28,5 +28,5 @@ $ php artisan generate:erd {圖片檔案名稱（含副檔名）}
 ----
 
 ## 畫面截圖
-![](https://i.imgur.com/2s2GdJg.png)
+![](https://i.imgur.com/DDr34zd.png)
 > 運用真實世界中事物和關係的觀念，以圖形化的方式來表示資料庫中抽象的資料架構

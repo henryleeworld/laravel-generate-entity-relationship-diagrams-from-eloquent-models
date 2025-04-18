@@ -3,38 +3,30 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * @property int $id
- * @property int $author_id
- * @property int $post_id
- * @property string $content
- * @property string $posted_at
- * @property string $created_at
- * @property string $updated_at
- * @property User $user
- * @property Post $post
- */
 class Comment extends Model
 {
     /**
-     * @var array
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
      */
     protected $fillable = ['author_id', 'post_id', 'content', 'posted_at', 'created_at', 'updated_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Get the user that owns the comment.
      */
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo('App\Models\User', 'author_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Get the post that owns the comment.
      */
-    public function post()
+    public function post(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Post');
+        return $this->belongsTo(Post::class);
     }
 }

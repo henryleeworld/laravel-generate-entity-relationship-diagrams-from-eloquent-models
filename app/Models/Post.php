@@ -3,49 +3,39 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property int $id
- * @property int $author_id
- * @property int $thumbnail_id
- * @property string $title
- * @property string $slug
- * @property string $content
- * @property string $posted_at
- * @property string $created_at
- * @property string $updated_at
- * @property User $user
- * @property Medium $medium
- * @property Comment[] $comments
- */
 class Post extends Model
 {
     /**
-     * @var array
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
      */
     protected $fillable = ['author_id', 'thumbnail_id', 'title', 'slug', 'content', 'posted_at', 'created_at', 'updated_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Get the user that owns the post.
      */
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo('App\Models\User', 'author_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Get the medium that owns the post.
      */
-    public function medium()
+    public function medium(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Medium', 'thumbnail_id');
+        return $this->belongsTo(Medium::class, 'thumbnail_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Get the comments for the post.
      */
-    public function comments()
+    public function comments(): HasMany
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany(Comment::class);
     }
 }
